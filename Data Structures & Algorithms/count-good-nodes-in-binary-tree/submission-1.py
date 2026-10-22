@@ -1,0 +1,35 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+
+        def dfs(root, curMax):
+            if not root:
+                return 0
+            
+            if root.val >= curMax:
+                return 1 + dfs(root.left, root.val) + dfs(root.right, root.val)
+            else:
+                return dfs(root.left, curMax) + dfs(root.right, curMax)
+
+        return dfs(root, root.val)
+
+# class Solution:
+#     def goodNodes(self, root: TreeNode) -> int:
+#         def dfs(node, maximum):
+#             if not node:
+#                 return 0
+            
+#             if node.val >= maximum:
+#                 maximum = node.val
+#                 return 1 + dfs(node.left, maximum) + dfs(node.right, maximum)
+#             else:
+#                 return dfs(node.left, maximum) + dfs(node.right, maximum)
+        
+#         return dfs(root, root.val)
+
